@@ -3,14 +3,24 @@
 
 function setup () {
 	// Initialize the game here.
+	brush = {x:320,y:240};
 }
 
 function update () { 
-	// Game logic goes here.
+	// Program logic goes here.
+	if (keyIsDown('right'))
+		brush.x += 1;
+	if (keyIsDown('down'))
+		brush.y += 1;
+	if (keyIsDown('left'))
+		brush.x -= 1;
+	if (keyIsDown('up'))
+		brush.y -= 1;
 }
 
 function render () { 
 	// Graphics code goes here.
+	drawCircle(brush.x,brush.y,20,"blue");
 }
 
 // This line runs the program. Don't need any changes here.

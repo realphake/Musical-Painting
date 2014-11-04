@@ -26,6 +26,22 @@ function keepTrackOfKeys () {
     if (!keyIsDown('j')&&keys.indexOf('j')!=-1) keys.splice(keys.indexOf('j'),1);
 }
 
+function posFromKey( key ) {
+    return {x:0,y:0}; // TODO
+}
+
+function colourFromKey( key ) {
+    return "white"; // TODO
+}
+
+function shapeFromKey( key ) {
+    return "circle"; // TODO
+}
+
+function sizeFromKey( key ) {
+    return 0; // TODO
+}
+
 /////////////////////////
 // Required functions. //
 /////////////////////////
@@ -42,7 +58,10 @@ function update () {
     // console.log(keys); // 'keys' contains the pressed keys in the order they were pressed.
     var p = {x:0,y:0}, si = 0, c = "white", sh = "circle";
     for (var k=0; k < keys.length; k++) {
-        console.log(keys[k]); // Draw a figure here.
+        if (k <= 0) p = posFromKey(keys[k]);
+        if (k <= 1) c = colourFromKey(keys[k]);
+        if (k <= 2) sh = shapeFromKey(keys[k]);
+        if (k <= 3) si = sizeFromKey(keys[k]);
     }
 }
 

@@ -1,0 +1,69 @@
+<!DOCTYPE html> <html lang="en"> <body>
+<script src="genericFunctions.js"></script> <script>
+
+function setup () {
+	// Initialize the game here.
+	brush = {x:320,y:240};
+}
+
+function update () { 
+	// Program logic goes here.
+	if (keyIsDown('right'))
+		brush.x += 1;
+	if (keyIsDown('down'))
+		brush.y += 1;
+	if (keyIsDown('left'))
+		brush.x -= 1;
+	if (keyIsDown('up'))
+		brush.y -= 1;
+
+	pianoLogic();
+}
+
+var pianoColor = "white";
+var width = 640;
+var height = 480;
+
+function pianoLogic(){
+
+	if (keyIsDown('w')){
+		brush.y = randInt(0,height); 
+		brush.x = randInt(0,width);
+		pianoColor = "red";
+	}
+	if (keyIsDown('a')){
+		brush.y = randInt(0,height); 
+		brush.x = randInt(0,width);
+		pianoColor = "blue";
+	}
+	if (keyIsDown('s')){
+		brush.y = randInt(0,height); 
+		brush.x = randInt(0,width);
+		pianoColor = "green";
+	}
+	if (keyIsDown('d')){
+		brush.y = randInt(0,height); 
+		brush.x = randInt(0,width);
+		pianoColor = "orange";
+	}
+
+}
+
+function render () { 
+	// Graphics code goes here.
+	fillCircle(brush.x,brush.y,randInt(0,50),pianoColor);
+	holdChanges();
+	fillBox (0,0,640,480,"black");
+	deployChanges("over", 0.02);
+}
+
+/*
+
+	w key pressed ==> orange, static pos, static size
+
+*/
+
+// This line runs the program. Don't need any changes here.
+setup(); setInterval(function () { update(); render(); }, 20);
+
+</script></body></html>

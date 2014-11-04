@@ -16,8 +16,9 @@ function setup () {
 
 function update () { 
 	// Program logic goes here.
+    var p = {x:0,y:0}, si = 0, c = "white", sh = "circle";
 	if (keyIsDown('w'))
-		brush.x += 1;
+        brush.x += 1;
 	if (keyIsDown('a'))
 		brush.y += 1;
 	if (keyIsDown('s'))

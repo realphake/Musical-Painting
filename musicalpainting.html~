@@ -7,18 +7,42 @@ function drawParameters(shape, colour, pos, size) {
     else if ( shape == 'line' ) drawLine(pos.x-size/2,pos.y-size/2,pos.x+size,pos.y+size,colour);
 }
 
-///////////////////////////////
+function keepTrackOfKeys () {
+    if (keyIsDown('w')&&keys.indexOf('w')==-1) keys.push('w');
+    if (keyIsDown('a')&&keys.indexOf('a')==-1) keys.push('a');
+    if (keyIsDown('s')&&keys.indexOf('s')==-1) keys.push('s');
+    if (keyIsDown('d')&&keys.indexOf('d')==-1) keys.push('d');
+    if (keyIsDown('f')&&keys.indexOf('f')==-1) keys.push('f');
+    if (keyIsDown('g')&&keys.indexOf('g')==-1) keys.push('g');
+    if (keyIsDown('h')&&keys.indexOf('h')==-1) keys.push('h');
+    if (keyIsDown('j')&&keys.indexOf('j')==-1) keys.push('j');
+    if (!keyIsDown('w')&&keys.indexOf('w')!=-1) keys.splice(keys.indexOf('w'),1);
+    if (!keyIsDown('a')&&keys.indexOf('a')!=-1) keys.splice(keys.indexOf('a'),1);
+    if (!keyIsDown('s')&&keys.indexOf('s')!=-1) keys.splice(keys.indexOf('s'),1);
+    if (!keyIsDown('d')&&keys.indexOf('d')!=-1) keys.splice(keys.indexOf('d'),1);
+    if (!keyIsDown('f')&&keys.indexOf('f')!=-1) keys.splice(keys.indexOf('f'),1);
+    if (!keyIsDown('g')&&keys.indexOf('g')!=-1) keys.splice(keys.indexOf('g'),1);
+    if (!keyIsDown('h')&&keys.indexOf('h')!=-1) keys.splice(keys.indexOf('h'),1);
+    if (!keyIsDown('j')&&keys.indexOf('j')!=-1) keys.splice(keys.indexOf('j'),1);
+}
+
+/////////////////////////
+// Required functions. //
+/////////////////////////
 
 function setup () {
 	// Initialize the game here.
 	brush = {x:320,y:240};
+    keys = [];
 }
 
 function update () { 
 	// Program logic goes here.
+    keepTrackOfKeys ();
+    // console.log(keys); // 'keys' contains the pressed keys in the order they were pressed.
     var p = {x:0,y:0}, si = 0, c = "white", sh = "circle";
-	if (keyIsDown('w') {
-        
+    for (var k=0; k < keys.length; k++) {
+        console.log(keys[k]); // Draw a figure here.
     }
 }
 

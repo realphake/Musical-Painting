@@ -39,14 +39,14 @@ function posFromKey( key ) {
 }
 
 function colourFromKey( key ) {
-    if ( key == 'w' ) return "lightblue";
-	if ( key == 'a' ) return "lightgreen";
-	if ( key == 's' ) return "yellow";
-	if ( key == 'd' ) return "pink";
-	if ( key == 'f' ) return "orange";
-	if ( key == 'g' ) return "red";
-	if ( key == 'h' ) return "brown";
-	if ( key == 'j' ) return "black";
+    if ( key == 'w' ) return "white";
+	if ( key == 'a' ) return "lightblue";
+	if ( key == 's' ) return "lightgreen";
+	if ( key == 'd' ) return "yellow";
+	if ( key == 'f' ) return "pink";
+	if ( key == 'g' ) return "orange";
+	if ( key == 'h' ) return "red";
+	if ( key == 'j' ) return "brown";
 }
 
 function shapeFromKey( key ) {
@@ -72,11 +72,12 @@ function sizeFromKey( key ) {
 }
 
 function moveBrush() {
-	brush.x += stepSize;
-	if ( brush.x >= 640 ) {
-		brush.y += stepSize;
-		brush.x = stepSize;
-	}
+	brush.x += p.x;
+	brush.y += p.y;
+	if ( brush.x >= 640 ) brush.x -= 640;
+	if ( brush.y >= 480 ) brush.y -= 480;
+	if ( brush.x < 0 ) brush.x += 640;
+	if ( brush.y < 0 ) brush.y += 480;
 }
 
 /////////////////////////
@@ -90,13 +91,15 @@ function setup () {
 	brush = {x:stepSize,y:stepSize};
     keys = []; // 'keys' contains the pressed keys in the order they were pressed.
 	hasStartedPlaying = false;
+	p = {x:0,y:0}, si = 0, c = "white", sh = "circle";
 }
 
 function update () { 
 	// Program logic goes here.
     keepTrackOfKeys ();
 	if (keys.length > 0) hasStartedPlaying = true;
-	if (hasStartedPlaying && keys.length == 0 ) {
+	if (hasStartedPlaying && keys.length == 0) {
+		drawParameters(sh, c, p, si);
 		moveBrush();
 		hasStartedPlaying = false;
 	}
@@ -104,17 +107,14 @@ function update () {
 
 function render () { 
 	// Graphics code goes here.
-	if (hasStartedPlaying ) {
-		var p = {x:0,y:0}, si = 0, c = "white", sh = "circle";
+	if (hasStartedPlaying) {
 		for (var k=0; k < keys.length; k++) {
 			if (k <= 0) p = posFromKey(keys[k]);
 			if (k <= 1) c = colourFromKey(keys[k]);
 			if (k <= 2) sh = shapeFromKey(keys[k]);
 			if (k <= 3) si = sizeFromKey(keys[k]);
 		}
-		if (keys.length > 0) drawParameters(sh, c, p, si);
 	}
-	
 }
 
 // This line runs the program. Don't need any changes here.

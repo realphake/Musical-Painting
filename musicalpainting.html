@@ -85,7 +85,8 @@ function moveBrush() {
 
 function setup () {
 	// Initialize the game here.
-	stepSize = 32;
+	fillBox(0, 0, 640, 480, "black");
+	stepSize = 64;
 	brush = {x:stepSize,y:stepSize};
     keys = []; // 'keys' contains the pressed keys in the order they were pressed.
 	hasStartedPlaying = false;

@@ -2,9 +2,10 @@
 <script src="genericFunctions.js"></script> <script>
 
 function drawParameters(shape, colour, pos, size) {
-    if ( shape == 'circle' ) fillCircle(pos.x,pos.y,size,colour);
-    else if ( shape == 'square' ) fillBox(pos.x-size/2, pos.y-size/2, size, size, colour);
-    else if ( shape == 'line' ) drawLine(pos.x-size/2,pos.y-size/2,pos.x+size,pos.y+size,colour);
+    if ( shape == 'circle' ) drawCircle(brush.x+pos.x,brush.y+pos.y,size,colour);
+    else if ( shape == 'square' ) drawBox(brush.x+pos.x-size/2, brush.y+pos.y-size/2, size, size, colour);
+    else if ( shape == 'line' ) drawLine ( brush.x+pos.x-size/2,brush.y+pos.y-size/2,
+											brush.x+pos.x+size,brush.y+pos.y+size,colour);
 }
 
 function keepTrackOfKeys () {
@@ -27,19 +28,55 @@ function keepTrackOfKeys () {
 }
 
 function posFromKey( key ) {
-    return {x:0,y:0}; // TODO
+	if ( key == 'w' ) return {x:-stepSize,y:-stepSize};
+	if ( key == 'a' ) return {x:0,y:-stepSize};
+	if ( key == 's' ) return {x:-stepSize,y:0};
+	if ( key == 'd' ) return {x:-stepSize,y:stepSize};
+	if ( key == 'f' ) return {x:stepSize,y:-stepSize};
+	if ( key == 'g' ) return {x:stepSize,y:0};
+	if ( key == 'h' ) return {x:0,y:stepSize};
+	if ( key == 'j' ) return {x:stepSize,y:stepSize};
 }
 
 function colourFromKey( key ) {
-    return "white"; // TODO
+    if ( key == 'w' ) return "lightblue";
+	if ( key == 'a' ) return "lightgreen";
+	if ( key == 's' ) return "yellow";
+	if ( key == 'd' ) return "pink";
+	if ( key == 'f' ) return "orange";
+	if ( key == 'g' ) return "red";
+	if ( key == 'h' ) return "brown";
+	if ( key == 'j' ) return "black";
 }
 
 function shapeFromKey( key ) {
-    return "circle"; // TODO
+    if ( key == 'w' ) return "circle";
+	if ( key == 'a' ) return "circle";
+	if ( key == 's' ) return "circle";
+	if ( key == 'd' ) return "square";
+	if ( key == 'f' ) return "square";
+	if ( key == 'g' ) return "square";
+	if ( key == 'h' ) return "line";
+	if ( key == 'j' ) return "line";
 }
 
 function sizeFromKey( key ) {
-    return 0; // TODO
+    if ( key == 'w' ) return 45;
+	if ( key == 'a' ) return 40;
+	if ( key == 's' ) return 35;
+	if ( key == 'd' ) return 30;
+	if ( key == 'f' ) return 25;
+	if ( key == 'g' ) return 20;
+	if ( key == 'h' ) return 15;
+	if ( key == 'j' ) return 10;
+}
+
+function moveBrush() {
+	brush.x += stepSize;
+	if ( brush.x >= 640 ) {
+		brush.y += stepSize;
+		brush.x = stepSize;
+	}
 }
 
 /////////////////////////
@@ -48,26 +85,36 @@ function sizeFromKey( key ) {
 
 function setup () {
 	// Initialize the game here.
-	brush = {x:320,y:240};
-    keys = [];
+	stepSize = 32;
+	brush = {x:stepSize,y:stepSize};
+    keys = []; // 'keys' contains the pressed keys in the order they were pressed.
+	hasStartedPlaying = false;
 }
 
 function update () { 
 	// Program logic goes here.
     keepTrackOfKeys ();
-    // console.log(keys); // 'keys' contains the pressed keys in the order they were pressed.
-    var p = {x:0,y:0}, si = 0, c = "white", sh = "circle";
-    for (var k=0; k < keys.length; k++) {
-        if (k <= 0) p = posFromKey(keys[k]);
-        if (k <= 1) c = colourFromKey(keys[k]);
-        if (k <= 2) sh = shapeFromKey(keys[k]);
-        if (k <= 3) si = sizeFromKey(keys[k]);
-    }
+	if (keys.length > 0) hasStartedPlaying = true;
+	if (hasStartedPlaying && keys.length == 0 ) {
+		moveBrush();
+		hasStartedPlaying = false;
+	}
+	console.log(brush);
 }
 
 function render () { 
 	// Graphics code goes here.
-	drawCircle(brush.x,brush.y,20,"blue");
+	if (hasStartedPlaying ) {
+		var p = {x:0,y:0}, si = 0, c = "white", sh = "circle";
+		for (var k=0; k < keys.length; k++) {
+			if (k <= 0) p = posFromKey(keys[k]);
+			if (k <= 1) c = colourFromKey(keys[k]);
+			if (k <= 2) sh = shapeFromKey(keys[k]);
+			if (k <= 3) si = sizeFromKey(keys[k]);
+		}
+		if (keys.length > 0) drawParameters(sh, c, p, si);
+	}
+	
 }
 
 // This line runs the program. Don't need any changes here.

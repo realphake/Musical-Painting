@@ -90,34 +90,30 @@ function setup () {
 	stepSize = 64;
 	brush = {x:320,y:240};
     keys = []; // 'keys' contains the pressed keys in the order they were pressed.
-	hasStartedPlaying = false;
+	previousKeys = [];
 	p = {x:0,y:0}, si = 0, c = "white", sh = "circle";
 }
 
-function update () { 
-	// Program logic goes here.
-    keepTrackOfKeys ();
-	if (keys.length > 0) hasStartedPlaying = true;
-	if (hasStartedPlaying && keys.length == 0) {
-		drawParameters(sh, c, p, si);
-		moveBrush();
-		hasStartedPlaying = false;
-	}
-}
-
-function render () { 
-	// Graphics code goes here.
-	if (hasStartedPlaying) {
+function frame () { 
+	// Every frame this is called.
+	keepTrackOfKeys ();
+	if (keys.length > 0) {
 		for (var k=0; k < keys.length; k++) {
-			if (k <= 0) p = posFromKey(keys[k]);
-			if (k <= 1) c = colourFromKey(keys[k]);
-			if (k <= 2) sh = shapeFromKey(keys[k]);
-			if (k <= 3) si = sizeFromKey(keys[k]);
+			if (k <= 0) c = colourFromKey(keys[k]);
+			if (k <= 1) sh = shapeFromKey(keys[k]);
+			if (k <= 2) si = sizeFromKey(keys[k]);
+			if (k <= 3) p = posFromKey(keys[k]);
 		}
 	}
+	if (previousKeys.length < keys.length) {
+		drawParameters(sh, c, p, si);
+		moveBrush();
+		console.log(same(previousKeys,keys));
+	}
+	previousKeys = clone(keys);
 }
 
 // This line runs the program. Don't need any changes here.
-setup(); setInterval(function () { update(); render(); }, 20);
+setup(); setInterval(function () { frame(); }, 20);
 
 </script></body></html>

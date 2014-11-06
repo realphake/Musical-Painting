@@ -76,8 +76,8 @@ function moveBrush() {
 	brush.y += p.y;
 	if ( brush.x >= 640 ) brush.x -= 640;
 	if ( brush.y >= 480 ) brush.y -= 480;
-	if ( brush.x < 0 ) brush.x += 640;
-	if ( brush.y < 0 ) brush.y += 480;
+	if ( brush.x <= 0 ) brush.x += 640;
+	if ( brush.y <= 0 ) brush.y += 480;
 }
 
 /////////////////////////
@@ -88,7 +88,7 @@ function setup () {
 	// Initialize the game here.
 	fillBox(0, 0, 640, 480, "black");
 	stepSize = 64;
-	brush = {x:stepSize,y:stepSize};
+	brush = {x:320,y:240};
     keys = []; // 'keys' contains the pressed keys in the order they were pressed.
 	hasStartedPlaying = false;
 	p = {x:0,y:0}, si = 0, c = "white", sh = "circle";

@@ -126,6 +126,7 @@ function clear () {
 }
 
 function drawBox (x,y,w,h,color) {
+	currentContext.beginPath();
 	currentContext.strokeStyle = color; currentContext.rect(x,y,w,h); 
 	currentContext.stroke(); currentContext.strokeStyle = "black";
 }

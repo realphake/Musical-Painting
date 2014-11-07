@@ -5,7 +5,7 @@ function drawParameters(shape, colour, pos, size) {
     if ( shape == 'circle' ) drawCircle(brush.x+pos.x,brush.y+pos.y,size,colour);
     else if ( shape == 'square' ) drawBox(brush.x+pos.x-size/2, brush.y+pos.y-size/2, size, size, colour);
     else if ( shape == 'line' ) drawLine ( brush.x+pos.x-size/2,brush.y+pos.y-size/2,
-											brush.x+pos.x+size,brush.y+pos.y+size,colour);
+					brush.x+pos.x+size,brush.y+pos.y+size,colour);
 }
 
 function keepTrackOfKeys () {
@@ -13,18 +13,18 @@ function keepTrackOfKeys () {
     if (keyIsDown('a')&&keys.indexOf('a')==-1) keys.push('a');
     if (keyIsDown('s')&&keys.indexOf('s')==-1) keys.push('s');
     if (keyIsDown('d')&&keys.indexOf('d')==-1) keys.push('d');
-    if (keyIsDown('f')&&keys.indexOf('f')==-1) keys.push('f');
-    if (keyIsDown('g')&&keys.indexOf('g')==-1) keys.push('g');
-    if (keyIsDown('h')&&keys.indexOf('h')==-1) keys.push('h');
-    if (keyIsDown('j')&&keys.indexOf('j')==-1) keys.push('j');
+    if (keyIsDown('up')&&keys.indexOf('up')==-1) keys.push('up');
+    if (keyIsDown('left')&&keys.indexOf('left')==-1) keys.push('left');
+    if (keyIsDown('down')&&keys.indexOf('down')==-1) keys.push('down');
+    if (keyIsDown('right')&&keys.indexOf('right')==-1) keys.push('right');
     if (!keyIsDown('w')&&keys.indexOf('w')!=-1) keys.splice(keys.indexOf('w'),1);
     if (!keyIsDown('a')&&keys.indexOf('a')!=-1) keys.splice(keys.indexOf('a'),1);
     if (!keyIsDown('s')&&keys.indexOf('s')!=-1) keys.splice(keys.indexOf('s'),1);
     if (!keyIsDown('d')&&keys.indexOf('d')!=-1) keys.splice(keys.indexOf('d'),1);
-    if (!keyIsDown('f')&&keys.indexOf('f')!=-1) keys.splice(keys.indexOf('f'),1);
-    if (!keyIsDown('g')&&keys.indexOf('g')!=-1) keys.splice(keys.indexOf('g'),1);
-    if (!keyIsDown('h')&&keys.indexOf('h')!=-1) keys.splice(keys.indexOf('h'),1);
-    if (!keyIsDown('j')&&keys.indexOf('j')!=-1) keys.splice(keys.indexOf('j'),1);
+    if (!keyIsDown('up')&&keys.indexOf('up')!=-1) keys.splice(keys.indexOf('up'),1);
+    if (!keyIsDown('left')&&keys.indexOf('left')!=-1) keys.splice(keys.indexOf('left'),1);
+    if (!keyIsDown('down')&&keys.indexOf('down')!=-1) keys.splice(keys.indexOf('down'),1);
+    if (!keyIsDown('right')&&keys.indexOf('right')!=-1) keys.splice(keys.indexOf('right'),1);
 }
 
 function posFromKey( key ) {
@@ -32,10 +32,10 @@ function posFromKey( key ) {
 	if ( key == 'a' ) return {x:0,y:-stepSize};
 	if ( key == 's' ) return {x:-stepSize,y:0};
 	if ( key == 'd' ) return {x:-stepSize,y:stepSize};
-	if ( key == 'f' ) return {x:stepSize,y:-stepSize};
-	if ( key == 'g' ) return {x:stepSize,y:0};
-	if ( key == 'h' ) return {x:0,y:stepSize};
-	if ( key == 'j' ) return {x:stepSize,y:stepSize};
+	if ( key == 'up' ) return {x:stepSize,y:-stepSize};
+	if ( key == 'left' ) return {x:stepSize,y:0};
+	if ( key == 'down' ) return {x:0,y:stepSize};
+	if ( key == 'right' ) return {x:stepSize,y:stepSize};
 }
 
 function colourFromKey( key ) {
@@ -43,10 +43,10 @@ function colourFromKey( key ) {
 	if ( key == 'a' ) return "lightblue";
 	if ( key == 's' ) return "lightgreen";
 	if ( key == 'd' ) return "yellow";
-	if ( key == 'f' ) return "pink";
-	if ( key == 'g' ) return "orange";
-	if ( key == 'h' ) return "red";
-	if ( key == 'j' ) return "brown";
+	if ( key == 'up' ) return "pink";
+	if ( key == 'left' ) return "orange";
+	if ( key == 'down' ) return "red";
+	if ( key == 'right' ) return "brown";
 }
 
 function shapeFromKey( key ) {
@@ -54,10 +54,10 @@ function shapeFromKey( key ) {
 	if ( key == 'a' ) return "circle";
 	if ( key == 's' ) return "circle";
 	if ( key == 'd' ) return "square";
-	if ( key == 'f' ) return "square";
-	if ( key == 'g' ) return "square";
-	if ( key == 'h' ) return "line";
-	if ( key == 'j' ) return "line";
+	if ( key == 'up' ) return "square";
+	if ( key == 'left' ) return "square";
+	if ( key == 'down' ) return "line";
+	if ( key == 'right' ) return "line";
 }
 
 function sizeFromKey( key ) {
@@ -65,10 +65,10 @@ function sizeFromKey( key ) {
 	if ( key == 'a' ) return 40;
 	if ( key == 's' ) return 35;
 	if ( key == 'd' ) return 30;
-	if ( key == 'f' ) return 25;
-	if ( key == 'g' ) return 20;
-	if ( key == 'h' ) return 15;
-	if ( key == 'j' ) return 10;
+	if ( key == 'up' ) return 25;
+	if ( key == 'left' ) return 20;
+	if ( key == 'down' ) return 15;
+	if ( key == 'right' ) return 10;
 }
 
 function moveBrush() {

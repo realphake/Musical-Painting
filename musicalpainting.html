@@ -108,7 +108,6 @@ function frame () {
 	if (previousKeys.length < keys.length) {
 		drawParameters(sh, c, p, si);
 		moveBrush();
-		console.log(same(previousKeys,keys));
 	}
 	previousKeys = clone(keys);
 }
